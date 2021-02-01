@@ -1,16 +1,4 @@
 # Node.js with React
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Free Trial(e6ee7776-5bc5-4b64-813e-f19669cfb5ab)'
-    appType: 'webAppLinux'
-    WebAppName: 'RayMarchedSphere'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    RuntimeStack: 'NODE|10-lts'
-    StartupCommand: 'npm run start'
-# Build a Node.js project that uses React.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
 - main
@@ -28,3 +16,16 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and build'
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Free Trial(e6ee7776-5bc5-4b64-813e-f19669cfb5ab)'
+    appType: 'webAppLinux'
+    WebAppName: 'RayMarchedSphere'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    RuntimeStack: 'NODE|10-lts'
+    StartupCommand: 'npm run start'
+# Build a Node.js project that uses React.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
