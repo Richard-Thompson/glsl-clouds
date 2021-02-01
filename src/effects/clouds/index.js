@@ -36,7 +36,7 @@ void main()
 {
 vec2 p = gl_FragCoord.xy / uResolution.xy;
 
-vec2 screenPos = ( gl_FragCoord.xy * 2.0 - uResolution.xy ) / min( uResolution.x, uResolution.y );
+vec2 screenPos = ( gl_FragCoord.xy * 2.0 - uResolution.xy ) / uResolution.xy;
 // convert ray direction from screen coordinate to world coordinate
 vec3 ray = (cameraWorldMatrix * cameraProjectionMatrixInverse * vec4( screenPos.xy, 1.0, 1.0 )).xyz;
 ray = normalize( ray );
