@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react";
+import { Canvas, extend, useThree } from 'react-three-fiber'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+
+import Map from './map';
+
+extend({ OrbitControls })
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{height: '100vh', width: '100vw'}}>
+      <Canvas
+        shadowMap
+        colorManagement
+        camera={{ position: [-4, 4, -4], far: 50 }}
+        style={{
+          background: "#FFFFFF",
+        }}
+        concurrent
+      >
+        <Map />
+      </Canvas>
     </div>
+    
   );
 }
 
