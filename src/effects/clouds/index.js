@@ -1,12 +1,7 @@
 export const clouds = {
   uniforms: {
-    tDiffuse: { value: null },
     uResolution: { value: null },
-    uTime: { value: null },
-    camPos: { value: null },
-    cameraWorldMatrix: {value: null},
-    cameraProjectionMatrixInverse: {value: null},
-   
+    uTime: { value: null },   
   },
   vertexShader: `
   precision mediump float;
@@ -20,7 +15,6 @@ export const clouds = {
     uniform float uTime;
 
     vec3 sundir = vec3(4.0,10.0,4.0);
-    const int STEPS = 150;
     const int OCTAVES = 2;
     vec3 backgroundColor = vec3(1.0);
 
@@ -139,7 +133,7 @@ export const clouds = {
             // Calculate if tip of ray is within one of our 
             // noise affected 3D special shapes, defined by the SDF
             // function.
-            float dist = sphereSDF(movedStepWithTime, .95);
+            float currentStepToSphere = sphereSDF(movedStepWithTime, .95);
 
 
             // Limit the clouds to a certain box, only within
@@ -159,9 +153,9 @@ export const clouds = {
             // Calculate The density of this rays position
             float cloudDensity = densityFunc( currentStep );
             
-            if (dist < 0.1002 && insideBoundries ) {
+            if (currentStepToSphere < 0.1002 && insideBoundries ) {
                 // Get color of tip of ray within spherical shape
-                vec3 colorRGB = lighting( movedStepWithTime, cloudDensity, backgroundColor, dist );
+                vec3 colorRGB = lighting( movedStepWithTime, cloudDensity, backgroundColor, currentStepToSphere );
 
                 // tweak opacity or alpha
                 float alpha = cloudDensity * 0.9;
@@ -185,7 +179,7 @@ export const clouds = {
             // overall rayDistanceToSphericalShape and bypass the need to in crease by 0.1 
             // each time. This way we speed things up.
            
-            rayDistanceToSphericalShape += dist < 0.0001 ? dist : 0.1; 
+            rayDistanceToSphericalShape += currentStepToSphere < 0.0001 ? currentStepToSphere : 0.1; 
             
         }
 

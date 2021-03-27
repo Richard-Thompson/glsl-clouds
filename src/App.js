@@ -11,8 +11,6 @@ function App() {
   return (
     <div style={{height: '100vh', width: '100vw'}}>
       <Canvas
-        shadowMap
-        colorManagement
         camera={{ position: [-4, 4, -4], far: 50 }}
         style={{
           background: "#FFFFFF",
