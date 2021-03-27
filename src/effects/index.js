@@ -37,10 +37,6 @@ const Effects = () => {
       cloudsPass.current.uniforms['cameraWorldMatrix'].value = camera.matrixWorld;
       cloudsPass.current.uniforms['cameraProjectionMatrixInverse'].value = new THREE.Matrix4().copy(camera.projectionMatrix).invert();
 
-
-      //  console.log({cameraPos: camera.position.x});
-      const pos = new THREE.Vector3().copy(camera.position);
-      console.log({ pos: pos.x })
     }
     // console.log({camera})
     camera.updateProjectionMatrix();
